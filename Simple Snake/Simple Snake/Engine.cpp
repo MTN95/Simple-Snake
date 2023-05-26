@@ -49,7 +49,8 @@ namespace mEngine {
             return false;
         }
 
-        snake = new Snake({400,300});
+        snake = new Snake( { 400,300 } );
+        //apple = new Apple( { 500,400 } );
 
         m_IsRunning = true;
         return true;
@@ -58,7 +59,7 @@ namespace mEngine {
     void mEngine::Engine::Update() {
         std::cout << "updating: " << cnt++ << '\n';
         snake->Update();
-
+        //apple->Update();
     }
 
     void Engine::Render() {
@@ -67,14 +68,35 @@ namespace mEngine {
         SDL_SetRenderDrawColor(m_Renderer, 160, 160, 160, 255);
         SDL_RenderClear(m_Renderer);
 
+        DrawGridLines();
+
 		snake->Render();
+        //apple->Render();
 
         // Present scene
         SDL_RenderPresent(m_Renderer);
     }
 
+    void Engine::DrawGridLines()
+    {
+        SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
+		// Draw horizontal grid lines
+		for (int i = 0; i <= GRID_ROWS; i++) {
+			float y = i * CELL_SIZE;
+			SDL_RenderDrawLineF(m_Renderer, 0, y, SCREEN_WIDTH, y);
+		}
+
+		// Draw vertical grid lines
+		for (int j = 0; j <= GRID_COLS; j++) {
+			float x = j * CELL_SIZE;
+			SDL_RenderDrawLineF(m_Renderer, x, 0, x, SCREEN_HEIGHT);
+		}
+    }
+
     void Engine::Clean() {
+        
         snake->Clean();
+        //apple->Clean();
 
         SDL_DestroyRenderer(m_Renderer);
         m_Renderer = nullptr;
@@ -103,16 +125,16 @@ namespace mEngine {
             }
             switch (event.key.keysym.sym) {
             case SDLK_UP:
-                snake->MoveY(-2.5);
+                snake->MoveY(-1.f);
                 break;
             case SDLK_DOWN:
-                snake->MoveY(2.5);
+                snake->MoveY(1.f);
                 break;
             case SDLK_RIGHT:
-                snake->MoveX(2.5);
+                snake->MoveX(1.f);
                 break;
             case SDLK_LEFT:
-                snake->MoveX(-2.5);
+                snake->MoveX(-1.f);
                 break;
             }
         }
@@ -131,4 +153,5 @@ namespace mEngine {
     bool Engine::LoadSFX(){
         return true;
     }
+
 }

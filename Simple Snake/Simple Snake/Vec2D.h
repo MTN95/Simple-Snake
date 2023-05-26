@@ -33,16 +33,5 @@ namespace mEngine
 		inline bool operator==(const Vec2D& other) const { return x == other.x && y == other.y; }
 		inline bool operator!=(const Vec2D& other) const { return !(*this == other); }
 
-		// vector operations
-		Vec2D distanceXY(const Vec2D& other) const
-		{
-			return { std::abs(x - other.x), std::abs(y - other.y) };
-		}
-		inline float length() const { return sqrt(x * x + y * y); }
-		inline float distance(const Vec2D& other) const { return (*this - other).length(); }
-		inline Vec2D normalize() const { float len = length(); return len == 0 ? Vec2D(0, 0) : *this / len; }
-		inline float dot(const Vec2D& other) const { return x * other.x + y * other.y; }
-		inline float angle(const Vec2D& other) const { return atan2(other.y - y, other.x - x); }
-		Vec2D project(const Vec2D& other) const { return other * dot(other) / other.dot(other); }
 	};	
 }
