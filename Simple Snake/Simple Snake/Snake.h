@@ -1,31 +1,37 @@
 #pragma once
 #include <SDL.h>
-#include <vector>
-#include "IObject.h"
-#include "Vec2D.h"
+#include <deque>
+#include "common.h"
+#include "Apple.h"
+#include "SnakeSegment.h"
 
-class Snake : public IObject {
-
+class Snake {
 public:
-	Snake(mEngine::Vec2D position);
+	Snake(unsigned headColor, unsigned segmentColor, unsigned coinColor);
+	~Snake();
+	void restart();
+	void update();
+	void render(SDL_Renderer *renderer);
+	inline bool isDead() { return this->dead; }
 
-	void Update() override;
-	void CheckWallsColiision(int SCREEN_WIDTH, int SCREEN_HEIGHT);
-	void Render() override;
-	void Clean() override;
-
-	std::vector<SDL_FRect>& GetSnakeRects() { return snake_rects; }
-
-	void MoveX(float amount);
-	void MoveY(float amount);
 
 private:
+	std::deque<SnakeSegment> segments;
+	Apple coin;
+	bool dead;
+	unsigned direction;
+	unsigned time, timeout;
+	unsigned headColor, segmentColor, coinColor;
+	SDL_Rect renderRect;
 
-	std::vector<SDL_FRect> snake_rects;
-	mEngine::Vec2D snake_position;
-	mEngine::Vec2D snake_velocity;
-
-	const float SNAKE_SIZE = 20;
-
+	void updateInputControls();
+	void renderSnake(SDL_Renderer* renderer);
+	void renderCoin(SDL_Renderer* renderer);
+	void RenderGrid(SDL_Renderer* renderer);
+	void addSegment(unsigned x, unsigned y);
+	void moveSnake();
+	bool checkForWallCollision();
+	bool checkForSelfCollision();
+	bool checkForCoinCollision();
+	
 };
-

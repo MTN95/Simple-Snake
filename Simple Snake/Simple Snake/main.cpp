@@ -2,10 +2,8 @@
 
 int main(int argc, char* argv[])
 {
-	mEngine::Engine* game = mEngine::Engine::Getinstance();
-
-	game->Init("test", false);
-	game->RunEngine();
-	game->Clean();
+	Engine* SnakeGame = Engine::GetInstance();
+	SnakeGame->RunEngine();
+	SnakeGame->Clean();
 	return 0;
 }

@@ -1,23 +1,17 @@
 #pragma once
-#include <SDL.h>
-#include "IObject.h"
-#include "Vec2D.h"
+#include "common.h"
 
-class Apple : public IObject
-{
+class Apple {
 public:
+	unsigned x;
+	unsigned y;
 
-	Apple(mEngine::Vec2D position);
+	Apple() {
+		this->respawn();
+	}
 
-	void Update() override;
-	void Render() override;
-	void Clean() override;
-
-	bool isColliding();
-
-private:
-	SDL_FRect apple_rect;
-	
-	const float APPLE_SIZE = 20;
+	void respawn() {
+		this->x = 1 + rand() % (CELL_WIDTH - 2);
+		this->y = 1 + rand() % (CELL_HEIGHT - 2);
+	}
 };
-
