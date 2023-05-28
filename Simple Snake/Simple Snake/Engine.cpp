@@ -34,10 +34,10 @@ bool Engine::Init(const char* title, bool fullscreen)
 		return false;
 	}
 
-	backgroundColor = SDL_MapRGB(SDL_AllocFormat(SDL_PIXELFORMAT_RGB888), 0, 64, 0);
-	snakeHeadColor = SDL_MapRGB(SDL_AllocFormat(SDL_PIXELFORMAT_RGB888), 0, 120, 0);
-	snakeSegmentColor = SDL_MapRGB(SDL_AllocFormat(SDL_PIXELFORMAT_RGB888), 0, 255, 0);
-	appleColor = SDL_MapRGB(SDL_AllocFormat(SDL_PIXELFORMAT_RGB888), 255, 0, 0);
+	backgroundColor = new SDL_Color{ 0, 64, 0};
+	snakeHeadColor = new SDL_Color{ 0, 120, 0 };
+	snakeSegmentColor = new SDL_Color{ 0, 255, 0 };
+	appleColor = new SDL_Color{ 255, 0, 0 };
 
 
 	m_Snake = new Snake(snakeHeadColor, snakeSegmentColor, appleColor);

@@ -7,7 +7,7 @@
 
 class Snake {
 public:
-	Snake(unsigned headColor, unsigned segmentColor, unsigned coinColor);
+	Snake(SDL_Color* headColor, SDL_Color* segmentColor, SDL_Color* coinColor);
 	~Snake();
 	void restart();
 	void update();
@@ -21,7 +21,9 @@ private:
 	bool dead;
 	unsigned direction;
 	unsigned time, timeout;
-	unsigned headColor, segmentColor, coinColor;
+	SDL_Color* headColor;
+	SDL_Color* segmentColor;
+	SDL_Color* coinColor;
 	SDL_Rect renderRect;
 
 	void updateInputControls();

@@ -29,10 +29,10 @@ private:
 
 	bool m_IsRunning;
 
-	unsigned backgroundColor;
-	unsigned snakeHeadColor;
-	unsigned snakeSegmentColor;
-	unsigned appleColor;
+	SDL_Color* backgroundColor;
+	SDL_Color* snakeHeadColor;
+	SDL_Color* snakeSegmentColor;
+	SDL_Color* appleColor;
 
 	Snake* m_Snake;
 };
